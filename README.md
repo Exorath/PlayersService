@@ -12,7 +12,7 @@ Service that keeps track of online players and the server they are connected to.
 {"online": true, "username": "Toonsev", "sid": "a1e99827-0c05-45d6-a822-911b425a4027", "joinTime": 1478190051447, "leaveTime": 1478190151447, "expiry": 1478190151447}
 ```
 - online (boolean): Whether or not the player is currently (or very recently) playing on Exorath
-- username (string): The last username this player was known as
+- username (string)[OPTIONAL]: The last username this player was known as
 - sid (string)[OPTIONAL]: The unique id of the server that the player is currently playing on, only returned when online=*true*
 - joinTime(num)[OPTIONAL]: The time (in UNIX millis) of when this player joined, only returned if the player is currently online
 - leaveTime(num)[OPTIONAL]: The time (in UNIX millis) of when this player leaved, only returned if the player is currently offline
