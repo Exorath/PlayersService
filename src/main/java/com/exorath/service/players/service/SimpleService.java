@@ -34,13 +34,39 @@ public class SimpleService implements Service {
     @Override
     public Player getPlayer(String uuid) {
         Player player = provider.getPlayer(uuid);
+        if(player == null) {
+            player = new Player();
+            player.setOnline(false);
+        }
         if (player.isOnline() == null)
             player.setOnline(false);
+        if(player.getExpire() != null && player.getExpire() < System.currentTimeMillis()) {
+            player.setOnline(false);
+            player.setLeaveTime(player.getExpire());
+            player.setJoinTime(null);
+            player.setServerId(null);
+        }
         return player;
     }
 
     @Override
     public Success updatePlayer(Player player) {
-        return null;
+        if(player.isOnline() == null) {
+            return new Success(false, "online is a required field");
+        }
+        if(player.getUuid() == null) {
+            return new Success(false, "uuid is a required field");
+        }
+        if(player.getExpire() == null) {
+            return new Success(false, "expire is a required field");
+        }
+
+        if(player.isOnline() && player.getLeaveTime() != null) {
+            return new Success(false, "online=true, leaveTime set");
+        }
+        if(!player.isOnline() && player.getJoinTime() != null) {
+            return new Success(false, "online=false, joinTime set");
+        }
+        return provider.updatePlayer(player);
     }
 }

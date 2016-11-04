@@ -32,10 +32,10 @@ public class Player {
     private String serverId;
     private Long joinTime;
     private Long leaveTime;
+    private String username;
 
     // GET - Optional, PUT - Required
     private Long expire;
-    private String username;
 
     public Player(Boolean online, String uuid, String username, String serverId, Long joinTime, Long leaveTime, Long expire) {
         this.online = online;
