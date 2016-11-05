@@ -16,6 +16,9 @@
 
 package com.exorath.service.players;
 
+import com.exorath.service.players.res.Player;
+import com.exorath.service.players.res.Success;
+
 public interface Service {
 
     /**

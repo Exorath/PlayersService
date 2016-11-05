@@ -17,6 +17,8 @@
 package com.exorath.service.players;
 
 import com.exorath.service.commons.portProvider.PortProvider;
+import com.exorath.service.players.res.Player;
+import com.exorath.service.players.res.Success;
 import com.google.gson.Gson;
 import spark.Route;
 
@@ -51,9 +53,6 @@ class Transport {
             } catch (Exception e) {
                 e.printStackTrace();
                 return new Success(false, "Invalid json");
-            }
-            if (player == null) {
-                return new Success(false, "Malformed json");
             }
             try {
                 return service.updatePlayer(player);

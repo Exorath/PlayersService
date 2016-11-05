@@ -24,18 +24,14 @@ import com.exorath.service.players.service.SimpleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Created by toonsev on 11/3/2016.
- */
 public class Main {
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
-    private Service svc;
 
-    public Main() throws Exception {
+    private Main() throws Exception {
         DynamoDBProvider dbProvider = DynamoDBProvider.getEnvironmentDynamoDBProvider();
         TableNameProvider tableNameProvider = TableNameProvider.getEnvironmentTableNameProvider();
-        this.svc = new SimpleService(new DynamoDatabaseProvider(dbProvider, tableNameProvider));
-        LOG.info("Service " + this.svc.getClass() + " instantiated");
+        Service svc = new SimpleService(new DynamoDatabaseProvider(dbProvider, tableNameProvider));
+        LOG.info("Service " + svc.getClass() + " instantiated");
 
         Transport.setup(svc, PortProvider.getEnvironmentPortProvider());
         LOG.info("HTTP transport setup");

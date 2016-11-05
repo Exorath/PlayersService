@@ -16,13 +16,10 @@
 
 package com.exorath.service.players.service;
 
-import com.exorath.service.players.Player;
+import com.exorath.service.players.res.Player;
 import com.exorath.service.players.Service;
-import com.exorath.service.players.Success;
+import com.exorath.service.players.res.Success;
 
-/**
- * Created by minez on 04/11/2016.
- */
 public class SimpleService implements Service {
 
     private DatabaseProvider provider;

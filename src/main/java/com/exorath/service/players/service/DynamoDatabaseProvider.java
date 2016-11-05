@@ -22,16 +22,16 @@ import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
 import com.amazonaws.services.dynamodbv2.model.*;
 import com.exorath.service.commons.dynamoDBProvider.DynamoDBProvider;
 import com.exorath.service.commons.tableNameProvider.TableNameProvider;
-import com.exorath.service.players.Player;
-import com.exorath.service.players.Success;
+import com.exorath.service.players.res.Player;
+import com.exorath.service.players.res.Success;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DynamoDatabaseProvider implements DatabaseProvider {
 
-    public static final String ONLINE = "online", USERNAME = "username", SERVER_ID = "sid", JOIN_TIME = "joinTime", LEAVE_TIME = "leaveTime", EXPIRE = "expiry";
+    private static final String ONLINE = "online", USERNAME = "username", SERVER_ID = "sid", JOIN_TIME = "joinTime", LEAVE_TIME = "leaveTime", EXPIRE = "expiry";
 
-    public static final String PRIM_KEY = "uuid";
+    private static final String PRIM_KEY = "uuid";
     private static final Logger logger = LoggerFactory.getLogger(DynamoDatabaseProvider.class);
 
     private DynamoDB database;

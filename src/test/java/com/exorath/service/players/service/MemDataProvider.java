@@ -16,8 +16,8 @@
 
 package com.exorath.service.players.service;
 
-import com.exorath.service.players.Player;
-import com.exorath.service.players.Success;
+import com.exorath.service.players.res.Player;
+import com.exorath.service.players.res.Success;
 
 import java.util.HashMap;
 
