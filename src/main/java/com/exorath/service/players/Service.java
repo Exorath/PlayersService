@@ -16,9 +16,6 @@
 
 package com.exorath.service.players;
 
-/**
- * Created by toonsev on 11/3/2016.
- */
 public interface Service {
 
     /**

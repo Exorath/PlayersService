@@ -21,13 +21,8 @@ import com.exorath.service.players.Success;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-/**
- * Created by minez on 04/11/2016.
- */
 public class SimpleServiceTest {
 
     private SimpleService service;
@@ -47,18 +42,36 @@ public class SimpleServiceTest {
 
     @Test
     public void testGetPlayerReturnsOnlinePlayerIfDatabaseEntryOnlinePresent() {
-        memDataProvider.getHashMap().put("abc", new Player(true, "abc", "abc", "wdadwad", 0l, 0l, System.currentTimeMillis() + 100000l));
+        memDataProvider.getHashMap().put("uuid-fake", new Player(true, "uuid-fake", "username", "server", 0L, 0L, System.currentTimeMillis() + 100000L));
 
-        Player player = service.getPlayer("abc");
+        Player player = service.getPlayer("uuid-fake");
         assertTrue(player.isOnline());
     }
 
     @Test
     public void testUpdateOnlineWithLeaveTimeReturnsErrorSuccess() {
-        Player player = new Player(true, "abcabcabc", "abc", "over there", 10000l, 10000l, System.currentTimeMillis() + 100000);
+        Player player = new Player(true, "uuid-fake", "username", "server", 10000L, 10000L, System.currentTimeMillis() + 100000);
         Success success = service.updatePlayer(player);
         assertFalse(success.getSuccess());
         assertNotNull(success.getError());
+    }
+
+    @Test
+    public void testGetAfterPlayerExpireFromOnlineToOffline() {
+        Player putPlayer = new Player(true, "uuid-fake", "username", "server", 10000L, null, System.currentTimeMillis() - 100000);
+        memDataProvider.getHashMap().put("uuid-fake", putPlayer);
+
+        Player getPlayer = service.getPlayer("uuid-fake");
+        assertFalse(getPlayer.isOnline());
+    }
+
+    @Test
+    public void testGetAfterPlayerExpireServerRemoved() {
+        Player putPlayer = new Player(true, "uuid-fake", "username", "server", 10000L, null, System.currentTimeMillis() - 100000);
+        memDataProvider.getHashMap().put("uuid-fake", putPlayer);
+
+        Player getPlayer = service.getPlayer("uuid-fake");
+        assertNull(getPlayer.getServerId());
     }
 
 }

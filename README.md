@@ -46,3 +46,4 @@ Service that keeps track of online players and the server they are connected to.
 | AWS_ACCESS_KEY_ID	| {acces_key_id} |
 | AWS_SECRET_KEY	| {secret_key} |
 | PORT	| {PORT} |
+| TABLE_NAME | {table_name} |

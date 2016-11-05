@@ -22,27 +22,45 @@ import spark.Route;
 
 import static spark.Spark.*;
 
-/**
- * Created by toonsev on 11/3/2016.
- */
-public class Transport {
+class Transport {
     private static final Gson GSON = new Gson();
 
-    public static void setup(Service service, PortProvider portProvider) {
+    static void setup(Service service, PortProvider portProvider) {
         port(portProvider.getPort());
         get("/players/:uuid", Transport.getGetPlayerRoute(service), GSON::toJson);
         put("/players/:uuid", Transport.getUpdatePlayerRoute(service), GSON::toJson);
     }
 
-    public static Route getGetPlayerRoute(Service service) {
-        return (req, res) -> service.getPlayer(req.params("uuid"));
+    private static Route getGetPlayerRoute(Service service) {
+        return (req, res) -> {
+            try {
+                return service.getPlayer(req.params("uuid"));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        };
     }
 
-    public static Route getUpdatePlayerRoute(Service service) {
+    private static Route getUpdatePlayerRoute(Service service) {
         return (req, res) -> {
-            Player player = GSON.fromJson(req.body(), Player.class);
-            player.setUuid(req.params("uuid"));
-            return service.updatePlayer(player);
+            Player player = null;
+            try {
+                player = GSON.fromJson(req.body(), Player.class);
+                player.setUuid(req.params("uuid"));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new Success(false, "Invalid json");
+            }
+            if (player == null) {
+                return new Success(false, "Malformed json");
+            }
+            try {
+                return service.updatePlayer(player);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new Success(false, e.getMessage());
+            }
         };
     }
 }

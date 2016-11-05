@@ -18,9 +18,6 @@ package com.exorath.service.players;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by toonsev on 11/3/2016.
- */
 public class Player {
 
     // Required
@@ -35,6 +32,7 @@ public class Player {
     private String username;
 
     // GET - Optional, PUT - Required
+    @SerializedName("expiry")
     private Long expire;
 
     public Player(Boolean online, String uuid, String username, String serverId, Long joinTime, Long leaveTime, Long expire) {
@@ -58,7 +56,7 @@ public class Player {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
+    void setUuid(String uuid) {
         this.uuid = uuid;
     }
 

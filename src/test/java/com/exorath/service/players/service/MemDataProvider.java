@@ -21,18 +21,15 @@ import com.exorath.service.players.Success;
 
 import java.util.HashMap;
 
-/**
- * Created by minez on 04/11/2016.
- */
-public class MemDataProvider implements DatabaseProvider {
+class MemDataProvider implements DatabaseProvider {
 
     private HashMap<String, Player> data;
 
-    public MemDataProvider() {
+    MemDataProvider() {
         data = new HashMap<>();
     }
 
-    public HashMap<String, Player> getHashMap() {
+    HashMap<String, Player> getHashMap() {
         return data;
     }
 

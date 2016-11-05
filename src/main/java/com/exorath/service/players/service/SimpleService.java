@@ -17,8 +17,8 @@
 package com.exorath.service.players.service;
 
 import com.exorath.service.players.Player;
-import com.exorath.service.players.Success;
 import com.exorath.service.players.Service;
+import com.exorath.service.players.Success;
 
 /**
  * Created by minez on 04/11/2016.
@@ -51,6 +51,9 @@ public class SimpleService implements Service {
 
     @Override
     public Success updatePlayer(Player player) {
+        if(player == null) {
+            return new Success(false, "Player was null");
+        }
         if(player.isOnline() == null) {
             return new Success(false, "online is a required field");
         }

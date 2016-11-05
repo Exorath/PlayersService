@@ -16,7 +16,11 @@
 
 package com.exorath.service.players;
 
+import com.exorath.service.commons.dynamoDBProvider.DynamoDBProvider;
 import com.exorath.service.commons.portProvider.PortProvider;
+import com.exorath.service.commons.tableNameProvider.TableNameProvider;
+import com.exorath.service.players.service.DynamoDatabaseProvider;
+import com.exorath.service.players.service.SimpleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +32,9 @@ public class Main {
     private Service svc;
 
     public Main() throws Exception {
-        //this.svc = new AzureTableStorageService(AzureStorageProvider.getEnvironmentAzureStorageProvider(), TableNameProvider.getEnvironmentTableNameProvider());//Todo: write service impl
+        DynamoDBProvider dbProvider = DynamoDBProvider.getEnvironmentDynamoDBProvider();
+        TableNameProvider tableNameProvider = TableNameProvider.getEnvironmentTableNameProvider();
+        this.svc = new SimpleService(new DynamoDatabaseProvider(dbProvider, tableNameProvider));
         LOG.info("Service " + this.svc.getClass() + " instantiated");
 
         Transport.setup(svc, PortProvider.getEnvironmentPortProvider());
