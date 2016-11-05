@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.exorath.service.players;
+package com.exorath.service.players.res;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -56,16 +56,8 @@ public class Player {
         return uuid;
     }
 
-    void setUuid(String uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getServerId() {
@@ -94,10 +86,6 @@ public class Player {
 
     public Long getExpire() {
         return expire;
-    }
-
-    public void setExpire(Long expire) {
-        this.expire = expire;
     }
 
     public void setOnline(Boolean online) {

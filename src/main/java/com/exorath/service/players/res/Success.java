@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.exorath.service.players;
+package com.exorath.service.players.res;
 
 import com.google.gson.annotations.SerializedName;
 
