@@ -3,7 +3,7 @@ sudo: required
 services:
   - docker
 script:
-  - docker build -t $REPO .
+  - docker build -t exorath/playersservice .
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u=exorath -p="$DOCKER_PASSWORD";
