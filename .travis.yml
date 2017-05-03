@@ -3,9 +3,14 @@ sudo: required
 services:
   - docker
 script:
-  - docker build -t exorath/playersservice .
+  - version=${TRAVIS_TAG-latest} ;
+    if [ "$TRAVIS_TAG" == "" ]; then
+    version=latest;
+    fi ;
+    docker build -t exorath/playersservice:${version} .
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+  - if [ -n "$TRAVIS_TAG" ]; then
     docker login -u=exorath -p="$DOCKER_PASSWORD";
-    docker push exorath/playersservice;
+    echo "version $TRAVIS_TAG" ;
+    docker push exorath/playersservice:$TRAVIS_TAG ;
     fi
